@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GST Calculator</title>
+<style>
+  body {
+    background-color:white; 
+  }
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #45a049; 
+  }
+</style>
+</head>
+<body>
+<h1>GST Calculator</h1>
+<form id="gstForm">
+  <label for="customerName">Customer Name:</label><br>
+  <input type="text" id="customerName" required><br>
+  <label for="phonenumber">Phone Number:</label><br>
+  <input type="text" id="phonenumber" pattern="[0-9]{10}" title="Phone number should be 10 digits" required><br>
+  <label for="customerAddress">Customer Address:</label><br>
+  <textarea id="customerAddress" rows="4" cols="50" required></textarea><br>
+  <label for="product">Select Product:</label><br>
+  <select id="product">
+    <option value="0">Select a product</option>
+    <option value="20">Maggi($20)</option>
+    <option value="40">Cup noodles($40)</option>
+    <option value="60">Pazzta($60)</option>
+  </select><br>
+  <label for="quantity">Quantity (1-10):</label><br>
+  <input type="number" id="quantity" min="1" max="10" required><br><br>
+  <button type="button" onclick="calculateTotal()">Calculate</button>
+</form>
+<div id="output"></div>
+
+<script>
+function calculateTotal() {
+
+  var customerName = document.getElementById('customerName').value;
+  var customerAddress = document.getElementById('customerAddress').value;
+  var phonenumber = document.getElementById('phonenumber').value;
+
+  if (customerName === '')
+  {
+    alert("please enter your name");
+  }
+  
+  if (customerAddress === '')
+  {
+    alert("please enter your address ")
+  }
+  if (phonenumber === '')
+   {
+    alert("Please enter your phone number.");
+    return;
+  }
+  
+
+  if (!/^\d{10}$/.test(phonenumber))
+   {
+    alert("Please enter 10-digit as phone number.");
+    return;
+  }
+
+  var productSelect = document.getElementById('product');
+  var selectedProduct = productSelect.options[productSelect.selectedIndex].text;
+  var productPrice = parseInt(productSelect.value);
+  
+ 
+  var quantity = parseInt(document.getElementById('quantity').value);
+  
+
+  var prize = productPrice * quantity;
+  var gst = prize * 0.18; 
+  var totalAmount = prize + gst;
+ 
+  var output = `
+    <h2>Output</h2>
+    <p><strong>Customer Name:</strong> ${customerName}</p>
+    <p><strong>Customer Address:</strong> ${customerAddress}</p>
+    <p><strong>Phone Number:</strong>${phonenumber}</p>
+    <p><strong>Product:</strong> ${selectedProduct}</p>
+    <p><strong>Quantity:</strong> ${quantity}</p>
+    <p><strong>Prize:</strong> ${prize}</p>
+    <p><strong>GST (18%):</strong> ${gst}</p>
+    <p><strong>Total Amount:</strong> ${totalAmount}</p>
+  `;
+  
+
+  document.getElementById('output').innerHTML = output;
+}
+</script>
+</body>
+</html>
