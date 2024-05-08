@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<head>
+
+    <title>Form validation</title>
+
+
+    <style>
+        
+        h2 {
+            text-align: center;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"],
+        input[type="date"],
+        select {
+            width: 20%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        .error {
+            color:coral;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        input[type="submit"] {
+            width: 5%;
+            padding: 10px;
+            color:rgb(15, 14, 14);
+            border:10px;
+            cursor: pointer;
+        }
+       
+    </style>
+</head>
+<body>
+    
+    
+    <form id="userForm" method="post" onsubmit="return validateForm()">
+            <h2>Validation Form</h2>
+                <label for="name">Name : </label>
+                <input type="text" id="name" name="name"><span id="nameError" style="color: red;"></span>
+           <br>
+            <label for="gender">Gender :</label>
+                
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">Male</label>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Female</label><br>
+                    <span id="genderError" style="color: red;"></span>
+                    <br>
+              <label for="Language">Language Known : </label>
+                    <input type="checkbox" name="tamil" id="Tamil">
+                    <label for="tamil">Tamil</label>
+                    <input type="checkbox" name="Language" value="English">
+                    <label for="eng">English</label>
+                    <input type="checkbox" name="Language" value="Hindi">
+                    <label for="hin">Hindi</label><br>
+                    <span id="languageError" style="color: red;"></span>
+                    <br>
+                    <label for="district">District : </label>
+                    <select name="district" id="district">
+                        <option value="none">select district</option>
+                        <option value="Ariyalur">Ariyalur</option>
+                        <option value="Chengalpattu">Chengalpattu</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Coimbatore">Coimbatore</option>
+                        <option value="Cuddalore">Cuddalore</option>
+                        <option value="Dharmapuri">Dharmapuri</option>
+                        <option value="Dindigul">Dindigul</option>
+                        <option value="Erode">Erode</option>
+                        <option value="Kallakurichi">Kallakurichi</option>
+                        <option value="Kancheepuram">Kancheepuram</option>
+                        <option value="Karur">Karur</option>
+                        <option value="Krishnagiri">Krishnagiri</option>
+                        <option value="Madurai">Madurai</option>
+                        <option value="Mayiladuthurai">Mayiladuthurai</option>
+                        <option value="Nagapattinam">Nagapattinam</option>
+                        <option value="Kanniyakumari">Kanniyakumari</option>
+                        <option value="Namakkal">Namakkal</option>
+                        <option value="Nilgiris">Nilgiris</option>
+                        <option value="Perambalur">Perambalur</option>
+                        <option value="Pudukottai">Pudukottai</option>
+                        <option value="Ramanathapuram">Ramanathapuram</option>
+                        <option value="Ranipet">Ranipet</option>
+                        <option value="Salem">Salem</option>
+                        <option value="Sivagangai">Sivagangai</option>
+                        <option value="Tenkasi">Tenkasi</option>
+                        <option value="Thanjavur">Thanjavur</option>
+                        <option value="Theni">Theni</option>
+                        <option value="Thiruvallur">Thiruvallur</option>
+                        <option value="Thiruvarur">Thiruvarur</option>
+                        <option value="Thoothukudi">Thoothukudi</option>
+                        <option value="Trichirappalli">Trichirappalli</option>
+                        <option value="Thirunelveli">Thirunelveli</option>
+                        <option value="Tirupathur">Tirupathur</option>
+                        <option value="Tiruppur">Tiruppur</option>
+                        <option value="Tiruvannamalai">Tiruvannamalai</option>
+                        <option value="Vellore">Vellore</option>
+                        <option value="Viluppuram">Viluppuram</option>
+                        <option value="Virudhunagar">Virudhunagar</option>
+                        
+                       
+                    </select><br>
+                    <br>
+                    <span id="districtError" style="color: red;"></span>
+                <label for="address">Address : </label>
+                <textarea id="address" name="address" rows="5" cols="65"></textarea><br>
+                <span id="addressError" style="color: red;"></span>
+                <br>
+        <label for="email">Email : </label>
+                <input type="email" id="email" name="email">
+                <span id="emailError" style="color: red;"></span>
+                <br>
+         <label for="mobile">Mobile Number : </label>
+                <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}"><br>
+                <span id="mobileError" style="color: red;"></span>
+                <br>
+          <label for="uname">User name : </label>
+                <input type="text" id="uname" name="uname"><br>
+                <span id="unameError" style="color: red;"></span>
+                <br>
+           
+           <label for="pass">Password : </label>
+                <input type="password" id="pass" name="pass"><br>
+                <span id="passError" style="color: red;"></span>
+           <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value.trim();
+            var gender = document.querySelector('input[name="gender"]:checked');
+            var language = document.querySelectorAll('input[name="Language"]:checked');
+            var district = document.getElementById("district").value;
+            var address = document.getElementById("address").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var mobile = document.getElementById("mobile").value.trim();
+            var uname = document.getElementById("uname").value.trim();
+           
+            var pass = document.getElementById("pass").value.trim();
+    
+            var nameError = document.getElementById("nameError");
+            var genderError = document.getElementById("genderError");
+            var languageError = document.getElementById("languageError");
+            var districtError = document.getElementById("districtError");
+            var addressError = document.getElementById("addressError");
+            var emailError = document.getElementById("emailError");
+            var mobileError = document.getElementById("mobileError");
+            var unameError = document.getElementById("unameError");
+           
+            var passError = document.getElementById("passError");
+    
+    
+            var nameRegex = /^[a-zA-Z\s]+$/;
+            var emailRegex = /^([a-zA-Z]+[0-9]*)+([.]?[a-zA-z0-9]+)*@\w+(\.\w{2,3})+$/;
+            var mobileRegex = /^[6-9]{1}[0-9]{9}$/;
+            var unameRegex = /^[a-zA-Z0-9_]+$/; 
+           
+            var passRegex = /^(?=.*[A-Z])[A-Z\d@$!%?&]{8,}$/;
+
+    
+          
+            if (name === "") {
+                nameError.textContent = "Please enter your name.";
+                return false;
+            } else {
+                nameError.textContent = "";
+            }
+    
+            if (!gender) {
+                genderError.textContent = "Please select your gender.";
+                return false;
+            } else {
+                genderError.textContent = "";
+            }
+    
+            if (language.length === 0) {
+                languageError.textContent = "Please select at least one language known.";
+                return false;
+            } else {
+                languageError.textContent = "";
+            }
+    
+            if (district === "none") {
+                districtError.textContent = "Please select your district.";
+                return false;
+            } else {
+                districtError.textContent = "";
+            }
+    
+            if (address === "") {
+                addressError.textContent = "Please enter your address.";
+                return false;
+            } else {
+                addressError.textContent = "";
+            }
+    
+            if (!email.match(emailRegex)) {
+                emailError.textContent = "Please enter a valid email address.";
+                return false;
+            } else {
+                emailError.textContent = "";
+            }
+    
+            if (!mobile.match(mobileRegex)) {
+                mobileError.textContent = "Please enter a valid 10-digit mobile number.";
+                return false;
+            } else {
+                mobileError.textContent = "";
+            }
+    
+            if (!uname.match(unameRegex)) {
+                unameError.textContent = "Please enter a valid username (only letters, numbers, and underscores).";
+                return false;
+            } else {
+                unameError.textContent = "";
+            }
+    
+           
+    
+            if (!pass.match(passRegex)) {
+                passError.textContent = "Password must contain ";
+                return false;
+            } else {
+                passError.textContent = "";
+            }
+    
+        }
+    </script>
+    
+</body>
+</html>
