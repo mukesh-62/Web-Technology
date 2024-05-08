@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Form</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="http://localhost:3000/submit" method="get">
+            <h1>Student Form</h1>
+            <table>
+                <tr>
+                    <td><label for="name"> Name:</label></td>
+                    <td><input type="text" id="name" name="name" required></td>
+                </tr>
+                
+                <tr>
+                    <td><label for="gender">Gender:</label></td>
+                    <td>
+                        <input type="radio" id="male" name="gender" value="male" required>
+                        <label for="male">Male</label>
+                        <input type="radio" id="female" name="gender" value="female" required>
+                        <label for="female">Female</label>
+                        <input type="radio" id="other" name="gender" value="other" required>
+                        <label for="other">Other</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="branch">State:</label></td>
+                    <td>
+                        <select id="branch" name="branch" required>
+                            <option value="None">Select a state</option>
+                            <option value="Tamilnadu">Tamilnadu</option>
+                            <option value="kerala">kerala</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Karnataka">Karnataka</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="mobile">Mobile Number:</label></td>
+                    <td><input type="text" id="mobile" name="mobile" required></td>
+                </tr>
+                <tr>
+                    <td><label for="branchAddress"> Address:</label></td>
+                    <td><textarea id="branchAddress" name="branchAddress" required></textarea></td>
+                </tr>
+            </table>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
